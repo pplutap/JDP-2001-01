@@ -18,8 +18,8 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-    public String getProduct(Long productId) {
-        return "getProduct test";
+    public ProductDto getProduct(Long productId) {
+        return new ProductDto(1L, "You got me...");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addProduct")
@@ -28,8 +28,8 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-    public String updateProduct(ProductDto productDto) {
-        return "updateProduct test";
+    public ProductDto updateProduct(ProductDto productDto) {
+        return new ProductDto(1L, "Now I am updated");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
