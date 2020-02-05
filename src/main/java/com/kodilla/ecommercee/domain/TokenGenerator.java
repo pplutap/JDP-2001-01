@@ -15,7 +15,6 @@ public class TokenGenerator {
         LocalDateTime timeStamp = LocalDateTime.now();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
         String tokenTime = timeStamp.format(timeFormatter);
-        String token = randomString + tokenTime;
-        return token;
+        return randomString + tokenTime;
     }
 }
