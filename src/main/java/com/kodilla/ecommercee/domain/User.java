@@ -41,14 +41,13 @@ public class User {
     private String token;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "CART_ID")
     private Cart cart;
 
     @OneToMany(targetEntity = Order.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
-    public User(long id, String name, String surname, String mail, String password) {
-        this.id = id;
+    public User(String name, String surname, String mail, String password) {
         this.name = name;
         this.surname = surname;
         this.mail = mail;
