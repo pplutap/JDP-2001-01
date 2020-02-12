@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +10,13 @@ import java.util.List;
 @Entity
 @Table(name = "products_groups")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Group {
+
+    public Group(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
