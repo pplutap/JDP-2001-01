@@ -18,5 +18,5 @@ public interface OrderRepository extends CrudRepository<Order,Long> {
     @Override
     Optional<Order> findById(Long id);
 
-
+    void deleteById(Long id);
 }

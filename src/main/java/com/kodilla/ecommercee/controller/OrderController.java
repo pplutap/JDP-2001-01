@@ -1,56 +1,56 @@
 package com.kodilla.ecommercee.controller;
 
 
+import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.OrderDto;
-import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/v1/order")
+@RequestMapping(value = "/v1/project/order", consumes = MediaType.APPLICATION_JSON_VALUE)
+
 
 public class OrderController {
 
 
     @Autowired
     private DbService service;
-    @Autowired
-    private OrderMapper orderMapper;
 
-    //lista wszystkich zamowien
+
     @RequestMapping(method = RequestMethod.GET, value = "getOrders")
     public List<OrderDto> getOrders() {
-        return orderMapper.mapToOrderDtoList(service.getAllOrders());
+        return Arrays.asList(new OrderDto(1L, "Order_one"),new OrderDto(2L,"Order_two"),new OrderDto(3L,"Order_three"));
     }
 
-    //dodanie nowego zamowienia
-    @RequestMapping(method = RequestMethod.POST, value = "addOrder", consumes = APPLICATION_JSON_VALUE)
-    public void addOrder(@RequestBody OrderDto orderDto) {
-        service.saveOrder(orderMapper.mapToOrder(orderDto));
-
-    }
-
-    //wyswietlenie pojedynczego zamowienia
     @RequestMapping(method = RequestMethod.GET, value = "getOrder")
-    public OrderDto getOrder(@RequestParam Long orderId) throws OrderNotFoundException {
-        return orderMapper.mapToOrderDto(service.getOrder(orderId).orElseThrow(OrderNotFoundException::new));
+    public Order getOrder(@RequestParam Long orderId) throws OrderNotFoundException{
+        return service.getOrder(1L).orElseThrow(OrderNotFoundException::new);
     }
 
-    //aktualizcja zamowienia
+
+    @RequestMapping(method = RequestMethod.POST, value = "addOrder")
+    public OrderDto addOrder(OrderDto orderDto) {
+        return new OrderDto(4L, "Order_four");
+    }
+
+
+
     @RequestMapping(method = RequestMethod.PUT, value = "updateOrder")
-    public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
-
-        return orderMapper.mapToOrderDto((service.saveOrder(orderMapper.mapToOrder(orderDto))));
+    public OrderDto updateOrder(Long orderId) {
+       return new OrderDto(2L,"Updated");
     }
 
-    //usuniecie zamowienia
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
-    public void deleteTask(@RequestParam Long orderId) {
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")
+    public void deleteOrder(@RequestParam Long orderId) {
         service.deleteOrder(orderId);
 
 
@@ -58,10 +58,3 @@ public class OrderController {
 }
 
 
-/*
-lista wszystkich zamówień
-dodanie nowego zamówienia
-wyświetlenie zamówienia
-aktualizacja zamówienia
-usunięcie zamówienia
- */

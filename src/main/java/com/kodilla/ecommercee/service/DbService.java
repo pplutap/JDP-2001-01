@@ -17,9 +17,6 @@ public class DbService {
         return repository.findAll();
     }
 
-    public Order getOrderById(final Long id) {
-        return repository.findById(id).orElse(null);
-    }
 
     public Order saveOrder(final Order order) {
         return repository.save(order);

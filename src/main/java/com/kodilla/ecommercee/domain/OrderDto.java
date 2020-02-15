@@ -10,17 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class OrderDto {
 
-    private Long id;
+    private Long orderId;
     private String name;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
 
 }
