@@ -1,100 +1,56 @@
 package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.domain.additional.Cart;
-import com.kodilla.ecommercee.domain.additional.Group;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "PRODUCTS")
 public class Product {
-    private long id;
-    private String name;
-    private String description;
-    private double price;
-    private int quantity;
-    private Group group;
-    private List<Cart> carts = new ArrayList<>();
-
-    public Product(String name, String description, double price, Group group) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.group = group;
-    }
 
     @Id
     @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
-    public long getId() {
-        return id;
-    }
+    private long id;
 
     @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
+    private String name;
 
     @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
-    }
+    private String description;
 
     @Column(name = "PRICE")
-    public double getPrice() {
-        return price;
-    }
+    private BigDecimal price;
 
     @Column(name = "QUANTITY")
-    public int getQuantity() {
-        return quantity;
-    }
+    private int quantity;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "GROUP_ID")
-    public Group getGroup() {
-        return group;
-    }
+    private Group group;
 
     @OneToMany(
             targetEntity = Cart.class,
             mappedBy = "product",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    public List<Cart> getCarts() {
-        return carts;
-    }
+    private List<Cart> carts = new ArrayList<>();
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
+    public Product(String name, String description, BigDecimal price, Group group) {
         this.name = name;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setPrice(double price) {
         this.price = price;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setGroup(Group group) {
         this.group = group;
     }
 
-    public void setCarts(List<Cart> carts) {
-        this.carts = carts;
-    }
 }
 
