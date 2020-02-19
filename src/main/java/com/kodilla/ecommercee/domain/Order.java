@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,15 +25,17 @@ public class Order {
     @Column(name = "order_name")
     private String name;
 
-    @ManyToMany(
-            targetEntity = Order.class,
+    @OneToMany(
+            targetEntity = User.class,
             mappedBy = "orders",
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
 
 
     private List<Order> orders;
 
-
+    @OneToMany(targetEntity = Order.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> orders = new ArrayList<>();
 }
 
