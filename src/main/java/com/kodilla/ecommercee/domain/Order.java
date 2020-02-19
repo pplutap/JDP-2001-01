@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -15,6 +14,15 @@ import java.util.List;
 @Entity
 @Table(name = "ORDERS")
 public class Order {
+
+    private User user;
+
+    @OneToOne(cascade =CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "USERD_ID")
+    public User getUser() {
+        return user;
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +35,7 @@ public class Order {
 
     @OneToMany(
             targetEntity = User.class,
-            mappedBy = "orders",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
@@ -35,7 +43,5 @@ public class Order {
 
     private List<Order> orders;
 
-    @OneToMany(targetEntity = Order.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> orders = new ArrayList<>();
 }
 
