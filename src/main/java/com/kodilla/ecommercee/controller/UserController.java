@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getUser")
-    public UserDto getUser(@RequestParam long id) throws UserNotFoundException {
+    public UserDto getUser(@RequestParam long id)  {
         return userMapper.mapToUserDto(service.getUser(id).orElseThrow(UserNotFoundException::new));
     }
 
