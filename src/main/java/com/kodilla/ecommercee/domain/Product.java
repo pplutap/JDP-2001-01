@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -39,11 +39,11 @@ public class Product {
     private Group group;
 
     @OneToMany(
-            targetEntity = Cart.class,
-            mappedBy = "product",
+            targetEntity = CartItem.class,
+            mappedBy = "cartProductId.product",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    private List<Cart> carts = new ArrayList<>();
+            fetch = FetchType.LAZY)
+    private Set<CartItem> cartItems = new HashSet<>();
 
     public Product(String name, String description, BigDecimal price, Group group) {
         this.name = name;
@@ -53,4 +53,3 @@ public class Product {
     }
 
 }
-
