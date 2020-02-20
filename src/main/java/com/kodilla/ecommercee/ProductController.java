@@ -4,14 +4,14 @@ import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RestController
-@RequestMapping("v1/project/products")
+@RequestMapping(path = "v1/project/products",
+        consumes = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class ProductController {
         return productMapper.mapToProductDto(service.getProduct(productId).orElseThrow(ProductNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addProduct", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "addProduct")
     public void addProduct(@RequestBody ProductDto productDto) {
         service.saveProduct(productMapper.mapToProduct(productDto));
     }

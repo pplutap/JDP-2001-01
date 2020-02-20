@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +19,19 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProductById (final long id) {
-        return productRepository.findById(id).orElse(null);
-    }
-
     public Product saveProduct(final Product product) {
         return productRepository.save(product);
     }
 
     public Optional<Product> getProduct(final Long id) {
-        return productRepository.findById(id);
+        return Optional.ofNullable(productRepository.findById(id).orElseThrow(ProductNotFoundException::new));
     }
 
-    public void deleteProduct(final Long id) {
-        productRepository.deleteById(id);
+    public void deleteProduct(final Long id) throws ProductNotFoundException {
+        try {
+            productRepository.deleteById(id);
+        } catch(ProductNotFoundException e) {
+            throw new ProductNotFoundException("Product with id " + id + " does not exist", e);
+        }
     }
 }

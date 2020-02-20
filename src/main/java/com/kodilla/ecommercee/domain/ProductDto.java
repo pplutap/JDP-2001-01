@@ -4,11 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class ProductDto {
-    private String productName;
+    private long id;
+    private String name;
     private String description;
-    private double price;
+    private BigDecimal price;
+
+    public ProductDto(String name, String description, BigDecimal price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 }
