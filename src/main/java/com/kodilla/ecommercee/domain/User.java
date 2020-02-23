@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "users")
+@EqualsAndHashCode
 public class User {
 
     @Id
@@ -47,11 +49,10 @@ public class User {
     @OneToMany(targetEntity = Order.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
-    public User(String name, String surname, String mail, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.mail = mail;
-        this.password = password;
+    public User(long id, boolean isBlocked, String token) {
+        this.id = id;
+        this.isBlocked = isBlocked;
+        this.token = token;
     }
 
 }
