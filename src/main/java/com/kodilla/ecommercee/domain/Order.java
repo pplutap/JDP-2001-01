@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -15,13 +16,6 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "ORDERS")
 public class Order {
-
-    public Order(LocalDateTime dateOfCreation, LocalDateTime dateOfShipment, String shippingAdress, Boolean isOrdered) {
-        this.dateOfCreation = dateOfCreation;
-        this.dateOfShipment = dateOfShipment;
-        this.shippingAdress = shippingAdress;
-        this.isOrdered = isOrdered;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
