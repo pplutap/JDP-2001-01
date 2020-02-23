@@ -13,10 +13,12 @@ public class ProductDto {
     private String name;
     private String description;
     private BigDecimal price;
+    private Group group;
 
-    public ProductDto(String name, String description, BigDecimal price) {
+    public ProductDto(String name, String description, BigDecimal price, Group group) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.group = group;
     }
 }
