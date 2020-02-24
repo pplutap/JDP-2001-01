@@ -1,5 +1,6 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductService;
