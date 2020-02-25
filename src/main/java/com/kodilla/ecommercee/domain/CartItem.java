@@ -9,6 +9,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @EqualsAndHashCode
 @Setter
@@ -36,8 +37,8 @@ public class CartItem {
     }
 
     @Transient
-    public Double getItemPrice() {
-        return getProduct().getPrice() * getQuantity();
+    public BigDecimal getItemPrice() {
+        return getProduct().getPrice().multiply( new BigDecimal(getQuantity())) ;
     }
 
     public CartProductId getCartProductId() {

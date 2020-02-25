@@ -8,9 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "ORDERS")
@@ -26,7 +26,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "ORDER_ID")
     private Long id;
 
     @NotNull
@@ -50,11 +50,11 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @OneToMany(
-            targetEntity = Product.class,
-            mappedBy = "productId",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+    @ManyToMany
+    @JoinTable(
+            name="JOIN_PRODUCT_ORDER",
+            joinColumns = {@JoinColumn(name="ORDER_ID", referencedColumnName = "ORDER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
     )
     private List<Product> products=new ArrayList<>();
 

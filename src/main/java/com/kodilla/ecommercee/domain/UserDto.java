@@ -14,10 +14,4 @@ public class UserDto {
     private String username;
     private boolean isBlocked;
     private String token;
-
-    public UserDto(long id, boolean isBlocked, String token) {
-        this.id = id;
-        this.isBlocked = isBlocked;
-        this.token = token;
-    }
 }

@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +20,7 @@ public class Product {
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name = "ID", unique = true)
+    @Column(name = "PRODUCT_ID", unique = true)
     private long id;
 
     @Column(name = "NAME")
@@ -30,13 +32,16 @@ public class Product {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @Column(name = "QUANTITY")
-    private int quantity;
+//    @Column(name = "QUANTITY")
+//    private int quantity;
 
     @ManyToOne
     @NotNull
     @JoinColumn(name = "GROUP_ID")
     private Group group;
+
+    @ManyToMany( mappedBy = "products")
+    private List<Order> orders=new ArrayList<>();
 
     @OneToMany(
             targetEntity = CartItem.class,
