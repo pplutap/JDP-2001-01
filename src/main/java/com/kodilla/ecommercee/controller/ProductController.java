@@ -1,47 +1,39 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.ProductDto;
-import com.kodilla.ecommercee.mapper.ProductMapper;
-import com.kodilla.ecommercee.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "v1/project/products",
-        consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("v1/project/products")
 public class ProductController {
-
-    @Autowired
-    private ProductService service;
-    @Autowired
-    private ProductMapper productMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "getProducts")
     public List<ProductDto> getProducts() {
-        return productMapper.mapToProductDtoList(service.getAllProducts());
+        return Arrays.asList(new ProductDto(1L, "Something"), new ProductDto(2L, "SomethingElse"));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-    public ProductDto getProduct(@RequestParam Long productId) throws ProductNotFoundException {
-        return productMapper.mapToProductDto(service.getProduct(productId).orElseThrow(ProductNotFoundException::new));
+    public ProductDto getProduct(Long productId) {
+        return new ProductDto(1L, "You got me...");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addProduct")
-    public void addProduct(@RequestBody ProductDto productDto) {
-        service.saveProduct(productMapper.mapToProduct(productDto));
+    public void addProduct(ProductDto productDto) {
+
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
-        return productMapper.mapToProductDto(service.saveProduct(productMapper.mapToProduct(productDto)));
+    public ProductDto updateProduct(ProductDto productDto) {
+        return new ProductDto(1L, "Now I am updated");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
-    public void deleteProduct(@RequestParam Long productId) {
-        service.deleteProduct(productId);
+    public void deleteProduct(Long productId) {
+
     }
 }
