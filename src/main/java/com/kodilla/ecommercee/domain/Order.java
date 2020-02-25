@@ -40,15 +40,15 @@ public class Order {
     private boolean isOrdered;
 
 
-    @OneToOne(cascade =CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade =CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @OneToMany(
-            targetEntity = Product.class,
-            mappedBy = "productId",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+    @ManyToMany
+    @JoinTable(
+            name = "ordered_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products=new ArrayList<>();
 
