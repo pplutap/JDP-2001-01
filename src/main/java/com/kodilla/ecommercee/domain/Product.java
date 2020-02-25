@@ -19,7 +19,7 @@ public class Product {
     @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
-    private long id;
+    private Long id;
 
     @Column(name = "NAME")
     private String name;
@@ -51,5 +51,4 @@ public class Product {
         this.price = price;
         this.group = group;
     }
-
 }
