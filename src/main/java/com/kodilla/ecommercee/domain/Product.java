@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,6 +45,9 @@ public class Product {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private Set<CartItem> cartItems = new HashSet<>();
+
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders;
 
     public Product(String name, String description, BigDecimal price, Group group) {
         this.name = name;

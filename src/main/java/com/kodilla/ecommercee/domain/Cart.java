@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,10 +26,10 @@ public class Cart {
     private Set<CartItem> cartItems = new HashSet<>();
 
     @Transient
-    public Double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return  getCartItems().stream()
-                .mapToDouble(CartItem::getItemPrice)
-                .sum();
+                .map(CartItem::getItemPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     @Transient
