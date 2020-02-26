@@ -13,8 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Group {
 
-    public Group(Long id, String name) {
-        this.id = id;
+    public Group(String name) {
         this.name = name;
     }
 

@@ -12,21 +12,25 @@ public class UserMapper {
 
     public User mapToUser(final UserDto userDto) {
         return new User(
-                userDto.getId(),
-                userDto.isBlocked(),
-                userDto.getToken());
+                userDto.getName(),
+                userDto.getSurname(),
+                userDto.getMail(),
+                userDto.getPassword()
+        );
     }
 
     public UserDto mapToUserDto(final User user) {
         return new UserDto(
-                user.getId(),
-                user.isBlocked(),
-                user.getToken());
+                user.getName(),
+                user.getSurname(),
+                user.getMail(),
+                user.getPassword()
+        );
     }
 
     public List<UserDto> mapToUserDtoList(final List<User> userList) {
         return userList.stream()
-                .map(t -> new UserDto(t.getId(), t.isBlocked(), t.getToken()))
+                .map(t -> new UserDto(t.getName(), t.getSurname(), t.getMail(), t.getPassword()))
                 .collect(Collectors.toList());
     }
 

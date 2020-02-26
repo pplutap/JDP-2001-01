@@ -12,14 +12,10 @@ public class OrderMapper {
 
     public OrderDto mapToOrderDto(final Order order){
         return new OrderDto(
-                order.getId(),
                 order.getDateOfCreation(),
                 order.getDateOfShipment(),
-                order.getShippingAdress(),
-                order.isOrdered(),
-                order.getUser().getId());
-
-
+                order.getShippingAdress()
+        );
     }
 
     public List<OrderDto> mapToOrderDtoList(final List<Order> orderList){
