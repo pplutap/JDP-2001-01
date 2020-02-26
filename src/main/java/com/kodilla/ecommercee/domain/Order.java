@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,8 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "ORDERS")
@@ -52,6 +50,12 @@ public class Order {
     )
     private List<Product> products=new ArrayList<>();
 
+
+    public Order(LocalDateTime dateOfCreation, LocalDateTime dateOfShipment, String shippingAdress) {
+        this.dateOfCreation = dateOfCreation;
+        this. dateOfShipment = dateOfShipment;
+        this.shippingAdress = shippingAdress;
+    }
 }
 
 

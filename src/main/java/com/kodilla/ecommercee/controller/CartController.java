@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.ProductDto;
@@ -18,7 +18,7 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getProducts")
     public List<ProductDto> getProducts() {
-        return Arrays.asList(new ProductDto(1L, "product1"), new ProductDto(2L, "product2"));
+        return Arrays.asList(new ProductDto(), new ProductDto());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addProduct")

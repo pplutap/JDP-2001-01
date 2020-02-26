@@ -49,10 +49,11 @@ public class User {
     @OneToMany(targetEntity = Order.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
-    public User(long id, boolean isBlocked, String token) {
-        this.id = id;
-        this.isBlocked = isBlocked;
-        this.token = token;
-    }
 
+    public User(String name, String surname, String mail, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.mail = mail;
+        this.password = password;
+    }
 }
